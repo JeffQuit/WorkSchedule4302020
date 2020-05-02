@@ -1,0 +1,159 @@
+Psuedocode for Project 5
+--------------------------------------------
+--------------------------------------------
+
+
+Basic Overview
+--------------------------------------------
+--------------------------------------------
+
+What to build:
+Single Day Scheduler 
+Time slots from 9am to 6pm (Last block is 5pm to 6pm in Hr blocks)
+Header:
+- Displays current date
+3 Columns:
+1. Time - Example 9:00am
+2. Timeblock Space 
+3. Save button
+
+Boostrap Dynamic Col/Row design
+Moment.js dynamic time processing
+
+----------------------Time Area----------------------
+
+Lists Times from 9am to 6pm
+Mostly just a text line in the left column. Can use an array to print the values or military time with an equasion to -12 if beyond 1pm and add PM. 
+
+** You'll need to use the [Moment.js](https://momentjs.com/) library to work with date and time. Be sure to read the documentation carefully and concentrate on using Moment.js in the browser. 
+
+
+
+----------------------Timeblock Space----------------------
+
+Contains long containers that are text fields that can be edited
+Only can edit if current time < time of event field. Present Time gets blocked out since you should be in that meeting or doing that task. You cannot change it within the hour on the fly. 
+
+Each timeblock is color coded to indicate whether it is in the past, present, or future.
+- Styles already exist in CSS to change the style of the background for the text area. Use classes of past, present, & future to set the correct style in accordance to the current time with Moment.js
+
+Text saved in timeblock is saved to local
+If page is refreshed, saved changes still show up (localStorage save)
+Need to find a way to save everything to the loal per hour time slot. 
+
+
+
+----------------------Save Button----------------------
+
+Allows saving for events that have not occured yet 
+- (current time < Time Area time)
+
+Use font awesome icons for the save icon:
+- If can edit - save icon
+-- https://fontawesome.com/icons/save?style=regular
+--- <i class="far fa-save"></i>
+- make it transition to green when hovered
+
+- If cannot edit - locked icon
+-- https://fontawesome.com/icons/lock?style=solid
+--- <i class="fas fa-lock"></i>
+- Also make it change to red 
+
+Note: Index.html file already comes with font-awsome already added to the css link.
+
+All saved events update to local storage
+
+
+Moment.js Library Notes
+--------------------------------------------
+--------------------------------------------
+
+Tutorials:
+- https://www.youtube.com/watch?v=n80RRNS1k64
+-- Playlist for how to use Moment.js
+
+JS Script Link:
+- Found via https://cdnjs.com/libraries/moment.js
+-- https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js
+--- This is already on the Index.HTML file included w/ the project
+
+Documentation:
+- https://momentjs.com/docs/
+-- Document on how this library is used
+
+Format Dates:
+- moment().format('MMMM Do YYYY, h:mm:ss a');
+-- Formats current time as | April 25th 2020, 6:52:00 pm  
+-- Will be used for tracking current time
+- Also need to add to the top of the page to track the date. Only have the month, day, and year for the header but when tracking the time, we need it to be formatted to the current day's hour. The example image only shows the specific date without the hour/min/sec read out
+
+Format in millitary time to make it easier so we don't have to do two cycles of 12 am/pm, rather 1 to 24 for each day. 
+Set an array for the military time that matches 9am to 5pm (9 to 17) and use that to compare to the current hour rounded down from Moment.js code
+
+Methods needed:
+isBefore - Checking for if event is before current time
+isAfter - Checking for if the event is after the current time
+
+or 
+
+use current time > time of time block. We can use this to === the time if we can round down the hour. 
+
+
+Psuedocode Plan:
+--------------------------------------------
+--------------------------------------------
+
+1. Initialize Array timeBlockArray that holds millitary hours
+2. Set up Loop that creates the DOMs and adds classes and other attributes such as data attributes to them to use later on.
+2. Set up forEach statement that injects stylization settings per the classes in the CSS folder and other parameters into the DOM created Divs. checks Moment time versus millitary time hour. This then sets the style from the CSS folder for past, present or future throught the addClass/removeClass
+3. Allows editing of the time areas if in the future. 
+4. If edits are made, saves them to local with a key value pair in the local for each millitary time and message:
+
+example - 
+Key: Value
+14: "Go Golfing"
+this would be 2pm (14-2) with the message saved of go golfing. 
+
+5. Get the local storage per military hour key value from 9am to 5pm and re-print that into the areas if text already exists. 
+6. Maybe make it clear at the end of the night? Not necessary for this 
+
+If future:-------
+Enable editing on blockTextCol/or ID of tag. use document.getElementById("myText").disabled = false;
+Set save icon to Save Button Icon.
+Change class of time-block to future
+Remove other f/p/p classes
+
+If present/past:------
+Disable editing on blockTextCol/or ID of tag. use document.getElementById("myText").disabled = true;
+Set save icon to Locked Button Icon.
+Change class of time-block to present/past
+Remove other f/p/p classes
+Change save Icon to lock icon
+Change transition color to red 
+
+
+CSS Changes:
+May need to remove color changes on CSS File to append them to the CSS style for each specific icon
+Add lock button for times that cannot be edited
+
+
+Functions/actions needed:
+--------------------------------------------
+--------------------------------------------
+
+1. Set the current day at the top using :
+$('#currentDay').append(moment().format('dddd, MMMM Do YYYY'));
+
+2. Loop that injects Doms into the page and adds classes and other things
+
+3. forEach function to add time matched fucntionality to the different time slot areas
+
+4. Save to local function that saves per each military hour value as its own key value pait in the local
+
+5. Get function that prints each associated key value pair to its text area using the key value as the data attribute to link back to the associated text area. 
+
+
+
+--------------------------------------------
+--------------------------------------------
+
