@@ -30,11 +30,11 @@ Instructions.md - The original instructions for the project
 
 ## Installation:
 
-Access Index.html via the URL https://jeffquit.github.io/WorkSchedule4302020/ No additional steps necessary to navagate the website
+Access Index.html via the URL https://jeffquit.github.io/jQuery---Work-Scheduler-Application/ No additional steps necessary to navagate the website
 
 ## Additional Links
 
-Github Repo Link: https://github.com/JeffQuit/WorkSchedule4302020
+Github Repo Link: https://github.com/JeffQuit/jQuery---Work-Scheduler-Application
 
 ## Authors:
 
